@@ -1,7 +1,10 @@
-// Gameboard closed function, Store gameboard cells as an array(?). Maybe have a value (0, 1, 2) assigned to each cell corresponding to (nothing, X, and O) where clicking the cell changes the cell's value depending on which player is active (X for player1, O for player2) then switches the active player. Player switching might be handled by another object.
+let player1 = createPlayer(prompt("Player 1 Name"), "x", "active");
+let player2 = createPlayer(prompt("Player 2 Name"), "o", "");
+const p1 = document.getElementById("player1");
+const p2 = document.getElementById("player2");
+p1.innerHTML = player1.username;
+p2.innerHTML = player2.username;
 
-
-// Players. Maybe not store a lot in these other than player name and which player is active/inactive? Unsure if we need both players in one object or seperate objects for each. Note From TOP: "Rule of thumb: if you only ever need ONE of something (gameBoard, displayController), use a module. If you need multiples of something (players!), create them with factories."
 function createPlayer(username, symbol, status) {
   return {
     username: username,
@@ -12,11 +15,6 @@ function createPlayer(username, symbol, status) {
     },
   };
 }
-
-let player1 = createPlayer("craig", "x", "active");
-let player2 = createPlayer("alex", "o", "");
-
-
 const gameboard = (() => {
   const a1 = document.getElementById("a1");
   const a2 = document.getElementById("a2");
@@ -28,48 +26,150 @@ const gameboard = (() => {
   const c2 = document.getElementById("c2");
   const c3 = document.getElementById("c3");
 
-  let cells = [a1, a2, a3, b1, b2, b3, c1, c2, c3]
+  let cells = [a1, a2, a3, b1, b2, b3, c1, c2, c3];
 
-  // a1.innerHTML = "x"
-  // a2.innerHTML = "x"
-  // a3.innerHTML = "x"
-
-  console.log(player1.status)
-  console.log(player2.status)
-  cells.forEach(function(symbolInput) {
-
-    symbolInput.addEventListener("click", function() {
+  cells.forEach(function (symbolInput) {
+    symbolInput.addEventListener("click", function () {
       if (player1.status === "active") {
-        this.innerHTML='x';
+        this.innerHTML = "x";
         player1.status = "";
-        player2.status = "active"
+        player2.status = "active";
+        gameControl();
       } else if (player2.status === "active") {
         this.innerHTML = "o";
         player1.status = "active";
         player2.status = "";
+        gameControl();
       }
-    })
-  }
-)})();
-console.log(player1.status);
-
-// function player1 () {
-
-// }
-
-// function player2 () {
-
-// }
-
-// Game control object. Handle functions like ask for player name, assess gameboard to check for full board/winner, invote initialization function to reset the board?
-
-const gameControl = (() => {
-  if (a1.innerHTML === "x" && a2.innerHTML === "x" && a3.innerHTML === "x") {
-    alert("X is the winner!")
-  }
-console.log(a1.innerHTML)
+    });
+  });
+  return cells;
 })();
 
-// function gameControl() {}
+// Game control object. Handle functions like ask for player name, assess gameboard to check for full board/winner, invoke initialization function to reset the board?
 
-function initilize() {}
+gameControl = function () {
+  // Check rows for winner
+  if (a1.innerHTML === "x" && a2.innerHTML === "x" && a3.innerHTML === "x") {
+    alert("X is the winner!");
+    initilize();
+  } else if (
+    b1.innerHTML === "x" &&
+    b2.innerHTML === "x" &&
+    b3.innerHTML === "x"
+  ) {
+    alert("X is the winner!");
+    initilize();
+  } else if (
+    c1.innerHTML === "x" &&
+    c2.innerHTML === "x" &&
+    c3.innerHTML === "x"
+  ) {
+    alert("X is the winner!");
+    initilize();
+  } else if (
+    a1.innerHTML === "o" &&
+    a2.innerHTML === "o" &&
+    a3.innerHTML === "o"
+  ) {
+    alert("O is the winner!");
+    initilize();
+  } else if (
+    b1.innerHTML === "o" &&
+    b2.innerHTML === "o" &&
+    b3.innerHTML === "o"
+  ) {
+    alert("O is the winner!");
+    initilize();
+  } else if (
+    c1.innerHTML === "o" &&
+    c2.innerHTML === "o" &&
+    c3.innerHTML === "o"
+  ) {
+    alert("O is the winner!");
+    initilize();
+
+    // Check columns for winner
+  } else if (
+    a1.innerHTML === "x" &&
+    b1.innerHTML === "x" &&
+    c1.innerHTML === "x"
+  ) {
+    alert("X is the winner!");
+    initilize();
+  } else if (
+    a2.innerHTML === "x" &&
+    b2.innerHTML === "x" &&
+    c2.innerHTML === "x"
+  ) {
+    alert("X is the winner!");
+    initilize();
+  } else if (
+    a3.innerHTML === "x" &&
+    b3.innerHTML === "x" &&
+    c3.innerHTML === "x"
+  ) {
+    alert("X is the winner!");
+    initilize();
+  } else if (
+    a1.innerHTML === "o" &&
+    b1.innerHTML === "o" &&
+    c1.innerHTML === "o"
+  ) {
+    alert("O is the winner!");
+    initilize();
+  } else if (
+    a2.innerHTML === "o" &&
+    b2.innerHTML === "o" &&
+    c2.innerHTML === "o"
+  ) {
+    alert("O is the winner!");
+    initilize();
+  } else if (
+    a3.innerHTML === "o" &&
+    b3.innerHTML === "o" &&
+    c3.innerHTML === "o"
+  ) {
+    alert("O is the winner!");
+    initilize();
+
+    // Check Diagonals for winner
+  } else if (
+    a1.innerHTML === "x" &&
+    b2.innerHTML === "x" &&
+    c3.innerHTML === "x"
+  ) {
+    alert("X is the winner!");
+    initilize();
+  } else if (
+    c1.innerHTML === "x" &&
+    b2.innerHTML === "x" &&
+    a3.innerHTML === "x"
+  ) {
+    alert("X is the winner!");
+    initilize();
+  } else if (
+    a1.innerHTML === "o" &&
+    b2.innerHTML === "o" &&
+    c3.innerHTML === "o"
+  ) {
+    alert("O is the winner!");
+    initilize();
+  } else if (
+    c1.innerHTML === "o" &&
+    b2.innerHTML === "o" &&
+    a3.innerHTML === "o"
+  ) {
+    alert("O is the winner!");
+    initilize();
+  }
+};
+gameControl();
+
+function initilize() {
+  gameboard.forEach((element) => (element.innerHTML = ""));
+  player1 = createPlayer(prompt("Player 1 Name"), "x", "active");
+  player2 = createPlayer(prompt("Player 2 Name"), "o", "");
+  p1.innerHTML = player1.username;
+  p2.innerHTML = player2.username;
+}
