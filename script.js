@@ -1,9 +1,9 @@
-let player1 = createPlayer(prompt("Player 1 Name"), "x", "active");
-let player2 = createPlayer(prompt("Player 2 Name"), "o", "");
+let player1 = createPlayer("Player 1 Name", "✕", "active");
+let player2 = createPlayer("Player 2 Name", "O", "");
 const p1 = document.getElementById("player1");
 const p2 = document.getElementById("player2");
-p1.innerHTML = player1.username;
-p2.innerHTML = player2.username;
+p1.innerHTML = player1.username + " - " + player1.symbol;
+p2.innerHTML = player2.username + " - " + player2.symbol;
 
 function createPlayer(username, symbol, status) {
   return {
@@ -30,16 +30,18 @@ const gameboard = (() => {
 
   cells.forEach(function (symbolInput) {
     symbolInput.addEventListener("click", function () {
-      if (player1.status === "active") {
-        this.innerHTML = "x";
-        player1.status = "";
-        player2.status = "active";
-        gameControl();
-      } else if (player2.status === "active") {
-        this.innerHTML = "o";
-        player1.status = "active";
-        player2.status = "";
-        gameControl();
+      if (this.innerHTML === "") {
+        if (player1.status === "active") {
+          this.innerHTML = "✕";
+          player1.status = "";
+          player2.status = "active";
+          gameControl();
+        } else if (player2.status === "active") {
+          this.innerHTML = "O";
+          player1.status = "active";
+          player2.status = "";
+          gameControl();
+        }
       }
     });
   });
@@ -50,126 +52,126 @@ const gameboard = (() => {
 
 gameControl = function () {
   // Check rows for winner
-  if (a1.innerHTML === "x" && a2.innerHTML === "x" && a3.innerHTML === "x") {
-    alert("X is the winner!");
-    initilize();
+  if (a1.innerHTML === "✕" && a2.innerHTML === "✕" && a3.innerHTML === "✕") {
+    alert("✕ is the winner!");
+    initialize();
   } else if (
-    b1.innerHTML === "x" &&
-    b2.innerHTML === "x" &&
-    b3.innerHTML === "x"
+    b1.innerHTML === "✕" &&
+    b2.innerHTML === "✕" &&
+    b3.innerHTML === "✕"
   ) {
-    alert("X is the winner!");
-    initilize();
+    alert("✕ is the winner!");
+    initialize();
   } else if (
-    c1.innerHTML === "x" &&
-    c2.innerHTML === "x" &&
-    c3.innerHTML === "x"
+    c1.innerHTML === "✕" &&
+    c2.innerHTML === "✕" &&
+    c3.innerHTML === "✕"
   ) {
-    alert("X is the winner!");
-    initilize();
+    alert("✕ is the winner!");
+    initialize();
   } else if (
-    a1.innerHTML === "o" &&
-    a2.innerHTML === "o" &&
-    a3.innerHTML === "o"
-  ) {
-    alert("O is the winner!");
-    initilize();
-  } else if (
-    b1.innerHTML === "o" &&
-    b2.innerHTML === "o" &&
-    b3.innerHTML === "o"
+    a1.innerHTML === "O" &&
+    a2.innerHTML === "O" &&
+    a3.innerHTML === "O"
   ) {
     alert("O is the winner!");
-    initilize();
+    initialize();
   } else if (
-    c1.innerHTML === "o" &&
-    c2.innerHTML === "o" &&
-    c3.innerHTML === "o"
+    b1.innerHTML === "O" &&
+    b2.innerHTML === "O" &&
+    b3.innerHTML === "O"
   ) {
     alert("O is the winner!");
-    initilize();
+    initialize();
+  } else if (
+    c1.innerHTML === "O" &&
+    c2.innerHTML === "O" &&
+    c3.innerHTML === "O"
+  ) {
+    alert("O is the winner!");
+    initialize();
 
     // Check columns for winner
   } else if (
-    a1.innerHTML === "x" &&
-    b1.innerHTML === "x" &&
-    c1.innerHTML === "x"
+    a1.innerHTML === "✕" &&
+    b1.innerHTML === "✕" &&
+    c1.innerHTML === "✕"
   ) {
-    alert("X is the winner!");
-    initilize();
+    alert("✕ is the winner!");
+    initialize();
   } else if (
-    a2.innerHTML === "x" &&
-    b2.innerHTML === "x" &&
-    c2.innerHTML === "x"
+    a2.innerHTML === "✕" &&
+    b2.innerHTML === "✕" &&
+    c2.innerHTML === "✕"
   ) {
-    alert("X is the winner!");
-    initilize();
+    alert("✕ is the winner!");
+    initialize();
   } else if (
-    a3.innerHTML === "x" &&
-    b3.innerHTML === "x" &&
-    c3.innerHTML === "x"
+    a3.innerHTML === "✕" &&
+    b3.innerHTML === "✕" &&
+    c3.innerHTML === "✕"
   ) {
-    alert("X is the winner!");
-    initilize();
+    alert("✕ is the winner!");
+    initialize();
   } else if (
-    a1.innerHTML === "o" &&
-    b1.innerHTML === "o" &&
-    c1.innerHTML === "o"
+    a1.innerHTML === "O" &&
+    b1.innerHTML === "O" &&
+    c1.innerHTML === "O"
   ) {
     alert("O is the winner!");
-    initilize();
+    initialize();
   } else if (
-    a2.innerHTML === "o" &&
-    b2.innerHTML === "o" &&
-    c2.innerHTML === "o"
+    a2.innerHTML === "O" &&
+    b2.innerHTML === "O" &&
+    c2.innerHTML === "O"
   ) {
     alert("O is the winner!");
-    initilize();
+    initialize();
   } else if (
-    a3.innerHTML === "o" &&
-    b3.innerHTML === "o" &&
-    c3.innerHTML === "o"
+    a3.innerHTML === "O" &&
+    b3.innerHTML === "O" &&
+    c3.innerHTML === "O"
   ) {
     alert("O is the winner!");
-    initilize();
+    initialize();
 
     // Check Diagonals for winner
   } else if (
-    a1.innerHTML === "x" &&
-    b2.innerHTML === "x" &&
-    c3.innerHTML === "x"
+    a1.innerHTML === "✕" &&
+    b2.innerHTML === "✕" &&
+    c3.innerHTML === "✕"
   ) {
-    alert("X is the winner!");
-    initilize();
+    alert("✕ is the winner!");
+    initialize();
   } else if (
-    c1.innerHTML === "x" &&
-    b2.innerHTML === "x" &&
-    a3.innerHTML === "x"
+    c1.innerHTML === "✕" &&
+    b2.innerHTML === "✕" &&
+    a3.innerHTML === "✕"
   ) {
-    alert("X is the winner!");
-    initilize();
+    alert("✕ is the winner!");
+    initialize();
   } else if (
-    a1.innerHTML === "o" &&
-    b2.innerHTML === "o" &&
-    c3.innerHTML === "o"
+    a1.innerHTML === "O" &&
+    b2.innerHTML === "O" &&
+    c3.innerHTML === "O"
   ) {
     alert("O is the winner!");
-    initilize();
+    initialize();
   } else if (
-    c1.innerHTML === "o" &&
-    b2.innerHTML === "o" &&
-    a3.innerHTML === "o"
+    c1.innerHTML === "O" &&
+    b2.innerHTML === "O" &&
+    a3.innerHTML === "O"
   ) {
     alert("O is the winner!");
-    initilize();
+    initialize();
   }
 };
 gameControl();
 
-function initilize() {
+function initialize() {
   gameboard.forEach((element) => (element.innerHTML = ""));
-  player1 = createPlayer(prompt("Player 1 Name"), "x", "active");
-  player2 = createPlayer(prompt("Player 2 Name"), "o", "");
-  p1.innerHTML = player1.username;
-  p2.innerHTML = player2.username;
+  let player1 = createPlayer("Player 1 Name", "✕", "active");
+  let player2 = createPlayer("Player 2 Name", "O", "");
+  p1.innerHTML = player1.username + " - " + player1.symbol;
+  p2.innerHTML = player2.username + " - " + player2.symbol;
 }
