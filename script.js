@@ -1,9 +1,17 @@
-let player1 = createPlayer("Player 1 Name", "✕", "active");
-let player2 = createPlayer("Player 2 Name", "O", "");
-const p1 = document.getElementById("player1");
-const p2 = document.getElementById("player2");
-p1.innerHTML = player1.username + " - " + player1.symbol;
-p2.innerHTML = player2.username + " - " + player2.symbol;
+const modalBtn = document.getElementById("modal-btn");
+let p1name = document.getElementById("p1name");
+let p2name = document.getElementById("p2name");
+let player1 = createPlayer(p1name.value, "✕", "active");
+let player2 = createPlayer(p2name.value, "O", "");
+
+modalBtn.addEventListener("click", function (event) {
+  event.preventDefault();
+  modal.style.display = "none";
+  const p1 = document.getElementById("player1");
+  const p2 = document.getElementById("player2");
+  p1.innerHTML = player1.username + " - " + player1.symbol;
+  p2.innerHTML = player2.username + " - " + player2.symbol;
+});
 
 function createPlayer(username, symbol, status) {
   return {
@@ -166,12 +174,37 @@ gameControl = function () {
     initialize();
   }
 };
-gameControl();
 
 function initialize() {
   gameboard.forEach((element) => (element.innerHTML = ""));
-  let player1 = createPlayer("Player 1 Name", "✕", "active");
-  let player2 = createPlayer("Player 2 Name", "O", "");
-  p1.innerHTML = player1.username + " - " + player1.symbol;
-  p2.innerHTML = player2.username + " - " + player2.symbol;
+  player1.status = "active";
+  player2.status = "";
+  // p1.innerHTML = player1.username + " - " + player1.symbol;
+  // p2.innerHTML = player2.username + " - " + player2.symbol;
 }
+
+// Get the modal
+let modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+let btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+let span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function () {
+  modal.style.display = "block";
+};
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function () {
+  modal.style.display = "none";
+};
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+};
