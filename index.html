@@ -8,6 +8,19 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <button id="myBtn">Open Modal</button>
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <form action="">
+          <label for="p1name">Player 1</label>
+          <input type="text" id="p1name" />
+          <label for="p2name">Player 2</label>
+          <input type="text" id="p2name" />
+          <button id="modal-btn">Play!</button>
+        </form>
+      </div>
+    </div>
     <div id="heading">
       <h1>Tic Tac Toe</h1>
     </div>
@@ -22,7 +35,7 @@
       <div id="c2"></div>
       <div id="c3"></div>
     </div>
-    <div>
+    <div class="info">
       <div id="player1"></div>
       <div id="player2"></div>
       <button onclick="initialize()">Reset Game</button>
