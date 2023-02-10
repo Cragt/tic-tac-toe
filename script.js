@@ -1,3 +1,4 @@
+(function() {
 const modalBtn = document.getElementById("modal-btn");
 let p1name = document.getElementById("p1name");
 let p2name = document.getElementById("p2name");
@@ -209,3 +210,4 @@ modalBtn.addEventListener("click", function (event) {
   p1.innerHTML = p1name.value + " - " + player1.symbol;
   p2.innerHTML = p2name.value + " - " + player2.symbol;
 });
+})();
