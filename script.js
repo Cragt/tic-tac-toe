@@ -3,24 +3,19 @@ let p1name = document.getElementById("p1name");
 let p2name = document.getElementById("p2name");
 let player1 = createPlayer(p1name.value, "✕", "active");
 let player2 = createPlayer(p2name.value, "O", "");
+const p1 = document.getElementById("player1");
+const p2 = document.getElementById("player2");
+// const winner = document.getElementById("banner");
+const p1win = `${p1name.value} wins!`;
+const p2win = `${p2name.value} wins!`;
 
-modalBtn.addEventListener("click", function (event) {
-  event.preventDefault();
-  modal.style.display = "none";
-  const p1 = document.getElementById("player1");
-  const p2 = document.getElementById("player2");
-  p1.innerHTML = player1.username + " - " + player1.symbol;
-  p2.innerHTML = player2.username + " - " + player2.symbol;
-});
+console.log(window);
 
 function createPlayer(username, symbol, status) {
   return {
     username: username,
     symbol: symbol,
     status: status,
-    getPlayerInfo() {
-      return username + " using " + symbol + " " + status;
-    },
   };
 }
 const gameboard = (() => {
@@ -50,53 +45,59 @@ const gameboard = (() => {
           player2.status = "";
           gameControl();
         }
+        if (player1.status === "active") {
+          p1.style.color = "#27ae60";
+          p2.style.color = "black";
+        } else {
+          p1.style.color = "black";
+          p2.style.color = "#27ae60";
+        }
       }
     });
   });
   return cells;
 })();
 
-// Game control object. Handle functions like ask for player name, assess gameboard to check for full board/winner, invoke initialization function to reset the board?
-
 gameControl = function () {
   // Check rows for winner
   if (a1.innerHTML === "✕" && a2.innerHTML === "✕" && a3.innerHTML === "✕") {
-    alert("✕ is the winner!");
+    // winner.innerHTML = p1win;
+    alert(p1win);
     initialize();
   } else if (
     b1.innerHTML === "✕" &&
     b2.innerHTML === "✕" &&
     b3.innerHTML === "✕"
   ) {
-    alert("✕ is the winner!");
+    alert(p1win);
     initialize();
   } else if (
     c1.innerHTML === "✕" &&
     c2.innerHTML === "✕" &&
     c3.innerHTML === "✕"
   ) {
-    alert("✕ is the winner!");
+    alert(p1win);
     initialize();
   } else if (
     a1.innerHTML === "O" &&
     a2.innerHTML === "O" &&
     a3.innerHTML === "O"
   ) {
-    alert("O is the winner!");
+    alert(p2win);
     initialize();
   } else if (
     b1.innerHTML === "O" &&
     b2.innerHTML === "O" &&
     b3.innerHTML === "O"
   ) {
-    alert("O is the winner!");
+    alert(p2win);
     initialize();
   } else if (
     c1.innerHTML === "O" &&
     c2.innerHTML === "O" &&
     c3.innerHTML === "O"
   ) {
-    alert("O is the winner!");
+    alert(p2win);
     initialize();
 
     // Check columns for winner
@@ -105,42 +106,42 @@ gameControl = function () {
     b1.innerHTML === "✕" &&
     c1.innerHTML === "✕"
   ) {
-    alert("✕ is the winner!");
+    alert(p1win);
     initialize();
   } else if (
     a2.innerHTML === "✕" &&
     b2.innerHTML === "✕" &&
     c2.innerHTML === "✕"
   ) {
-    alert("✕ is the winner!");
+    alert(p1win);
     initialize();
   } else if (
     a3.innerHTML === "✕" &&
     b3.innerHTML === "✕" &&
     c3.innerHTML === "✕"
   ) {
-    alert("✕ is the winner!");
+    alert(p1win);
     initialize();
   } else if (
     a1.innerHTML === "O" &&
     b1.innerHTML === "O" &&
     c1.innerHTML === "O"
   ) {
-    alert("O is the winner!");
+    alert(p2win);
     initialize();
   } else if (
     a2.innerHTML === "O" &&
     b2.innerHTML === "O" &&
     c2.innerHTML === "O"
   ) {
-    alert("O is the winner!");
+    alert(p2win);
     initialize();
   } else if (
     a3.innerHTML === "O" &&
     b3.innerHTML === "O" &&
     c3.innerHTML === "O"
   ) {
-    alert("O is the winner!");
+    alert(p2win);
     initialize();
 
     // Check Diagonals for winner
@@ -149,28 +150,28 @@ gameControl = function () {
     b2.innerHTML === "✕" &&
     c3.innerHTML === "✕"
   ) {
-    alert("✕ is the winner!");
+    alert(p1win);
     initialize();
   } else if (
     c1.innerHTML === "✕" &&
     b2.innerHTML === "✕" &&
     a3.innerHTML === "✕"
   ) {
-    alert("✕ is the winner!");
+    alert(p1win);
     initialize();
   } else if (
     a1.innerHTML === "O" &&
     b2.innerHTML === "O" &&
     c3.innerHTML === "O"
   ) {
-    alert("O is the winner!");
+    alert(p2win);
     initialize();
   } else if (
     c1.innerHTML === "O" &&
     b2.innerHTML === "O" &&
     a3.innerHTML === "O"
   ) {
-    alert("O is the winner!");
+    alert(p2win);
     initialize();
   }
 };
@@ -179,32 +180,32 @@ function initialize() {
   gameboard.forEach((element) => (element.innerHTML = ""));
   player1.status = "active";
   player2.status = "";
-  // p1.innerHTML = player1.username + " - " + player1.symbol;
-  // p2.innerHTML = player2.username + " - " + player2.symbol;
+  p1.style.color = "#27ae60";
+  p2.style.color = "black";
 }
 
-// Get the modal
 let modal = document.getElementById("myModal");
-
-// Get the button that opens the modal
 let btn = document.getElementById("myBtn");
-
-// Get the <span> element that closes the modal
 let span = document.getElementsByClassName("close")[0];
 
-// When the user clicks on the button, open the modal
 btn.onclick = function () {
   modal.style.display = "block";
 };
 
-// When the user clicks on <span> (x), close the modal
 span.onclick = function () {
   modal.style.display = "none";
 };
 
-// When the user clicks anywhere outside of the modal, close it
 window.onclick = function (event) {
   if (event.target == modal) {
     modal.style.display = "none";
   }
 };
+
+modalBtn.addEventListener("click", function (event) {
+  event.preventDefault();
+  modal.style.display = "none";
+
+  p1.innerHTML = p1name.value + " - " + player1.symbol;
+  p2.innerHTML = p2name.value + " - " + player2.symbol;
+});
